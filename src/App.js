@@ -115,6 +115,8 @@ class App extends Component {
       activePage: 1,
       tasks: updatedTasks,
       totalPages: this.calculateTotalPages(updatedTasks, pageSize),
+      removeDialogIsOpen: false,
+      removeDialogTask: null,
     });
   }
 
