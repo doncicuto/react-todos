@@ -1,13 +1,14 @@
 import React from 'react';
 import orderBy from 'lodash/orderBy';
-import { Table, Message } from 'semantic-ui-react';
+import { Table, Message, Confirm } from 'semantic-ui-react';
 import { FormattedMessage } from 'react-intl';
+import { injectIntl } from 'react-intl';
 
 import Task from './Task';
 import SearchTasks from './SearchTasks';
 import PaginateTasks from './PaginateTasks';
 
-export default ({
+const Tasks = ({
   tasks,
   filter,
   searchTerm,
@@ -20,11 +21,13 @@ export default ({
   onPageSizeChange,
   onTaskState,
   onTaskRemove,
-  onTaskRemoveDialogOpen,
-  onTaskRemoveDialogClose,
+  onRemoveDialogOpen,
+  onRemoveDialogCancel,
   onTaskSort,
   onSearchChange,
-  removeTaskDialogIsOpen,
+  removeDialogIsOpen,
+  removeDialogTask,
+  intl,
 }) => {
 
 
@@ -38,7 +41,7 @@ export default ({
       completed={task.completed}
       createdAt={task.createdAt}
       onTaskState={onTaskState}
-      onTaskRemove={onTaskRemove}
+      onTaskRemove={onRemoveDialogOpen}
     />
   );
 
@@ -71,6 +74,16 @@ export default ({
 
   return (
     <div>
+      <Confirm
+          open={removeDialogIsOpen}
+          size="small"
+          header={intl.formatMessage({id: "areu.sure"})}
+          content={`${intl.formatMessage({id: "remove.task"})} "${removeDialogTask}?"`}
+          cancelButton={intl.formatMessage({id: "dialog.cancel"})}
+          confirmButton={intl.formatMessage({id: "dialog.confirm"})}
+          onCancel={onRemoveDialogCancel}
+          onConfirm={() => onTaskRemove(removeDialogTask)}
+      />
       <SearchTasks
         searchTerm={searchTerm}
         onSearchChange={onSearchChange}
@@ -124,3 +137,5 @@ export default ({
   );
 
 };
+
+export default injectIntl(Tasks);

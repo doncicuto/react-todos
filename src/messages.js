@@ -13,6 +13,10 @@ export default {
     "page.size": "Results per page",
     "task.add": "Add task",
     "task.placeholder": "Add your new task",
+    "dialog.confirm": "Confirm",
+    "dialog.cancel": "Cancel",
+    "remove.task": "Do you want to delete the task",
+    "areu.sure": "Are you sure?",
   },
   'es': {
     "app.title": "Mis Tareas",
@@ -28,5 +32,9 @@ export default {
     "page.size": "Resultados por página",
     "task.add": "Añadir tarea",
     "task.placeholder": "Introduce una nueva tarea",
+    "dialog.confirm": "Confirmar",
+    "dialog.cancel": "Cancelar",
+    "remove.task": "¿Quiere borrar la tarea",
+    "areu.sure": "¿Está seguro?",
   }
 }

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import moment from 'moment';
-import 'moment/locale/es';
+
 import './App.css';
 import { Divider } from 'semantic-ui-react';
 import { FormattedMessage } from 'react-intl';
@@ -27,9 +26,9 @@ class App extends Component {
       totalPages: this.calculateTotalPages(tasks.filter( item => !item.completed ), pageSize),
       sortBy: "createdAt",
       sortDirection: "ascending",
+      removeDialogIsOpen: false,
+      removeDialogTask: null,
     }
-
-    moment.locale('es');
 
     this.handleTaskAdd = this.handleTaskAdd.bind(this);
     this.handleTaskChange = this.handleTaskChange.bind(this);
@@ -39,6 +38,8 @@ class App extends Component {
     this.handlePageSizeChange = this.handlePageSizeChange.bind(this);
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleTaskSort = this.handleTaskSort.bind(this);
+    this.handleRemoveDialogOpen = this.handleRemoveDialogOpen.bind(this);
+    this.handleRemoveDialogCancel = this.handleRemoveDialogCancel.bind(this);
     this.showTasks = this.showTasks.bind(this);
   }
 
@@ -60,7 +61,8 @@ class App extends Component {
           totalPages,
           activePage: totalPages,
           sortBy: "createdAt",
-          sortDirection: "ascending"
+          sortDirection: "ascending",
+          modalOpen: true
         });
       } else {
         this.setState({
@@ -145,6 +147,20 @@ class App extends Component {
     })
   }
 
+  handleRemoveDialogOpen(task) {
+    this.setState({
+      removeDialogIsOpen: true,
+      removeDialogTask: task
+    })
+  }
+
+  handleRemoveDialogCancel() {
+    this.setState({
+      removeDialogIsOpen: false,
+      removeDialogTask: null
+    })
+  }
+
   showTasks(filter=null) {
     const { tasks, pageSize } = this.state;
     let totalPages;
@@ -174,7 +190,9 @@ class App extends Component {
       pageSize,
       totalPages,
       errorNewTask,
-      newTask
+      newTask,
+      removeDialogIsOpen,
+      removeDialogTask,
     } = this.state;
     return (
       <div className="AppContainer">
@@ -190,12 +208,16 @@ class App extends Component {
           activePage={activePage}
           pageSize={pageSize}
           totalPages={totalPages}
+          removeDialogIsOpen={removeDialogIsOpen}
+          removeDialogTask={removeDialogTask}
           onTaskState={this.handleTaskState}
           onTaskRemove={this.handleTaskRemove}
           onPageChange={this.handlePageChange}
           onPageSizeChange={this.handlePageSizeChange}
           onSearchChange={this.handleSearchChange}
           onTaskSort={this.handleTaskSort}
+          onRemoveDialogOpen={this.handleRemoveDialogOpen}
+          onRemoveDialogCancel={this.handleRemoveDialogCancel}
         />
         <Divider />
         <TaskFilter

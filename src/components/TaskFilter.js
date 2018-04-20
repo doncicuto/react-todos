@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'semantic-ui-react';
 import { FormattedMessage } from 'react-intl';
 
-export default ({
+const TaskFilter = ({
   filter,
   showTasks,
 }) => (
@@ -16,3 +16,5 @@ export default ({
     </Button.Group>
   </div>
 );
+
+export default TaskFilter;
