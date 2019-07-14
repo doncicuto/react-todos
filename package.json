@@ -9,7 +9,7 @@
   "author": "Miguel A.C <doncicuto@gmail.com>",
   "dependencies": {
     "gh-pages": "^1.1.0",
-    "lodash": "^4.17.5",
+    "lodash": "^4.17.13",
     "moment": "^2.22.1",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
